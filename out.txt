@@ -1,0 +1,144 @@
+╔══════════════════════════════════════════════════════════════╗
+║           DEKKER'S ALGORITHM DEMONSTRATION                   ║
+║                                                              ║
+║  Two threads competing for a shared critical section.        ║
+║  Each thread will enter 5 times.                            ║
+║  Final counter should be 10 if mutual exclusion holds.     ║
+╚══════════════════════════════════════════════════════════════╝
+
+Initial state:
+  flag[0] = 0, flag[1] = 0
+  turn = 0
+  shared_counter = 0
+
+Starting threads...
+════════════════════════════════════════════════════════════════
+[[2] Thread 1: === STARTED ===
+[3] Thread 1: --- Iteration 1/5 ---
+1[4] Thread ] Thread 1: 0: === STARTED ===
+[5] Thread 0: --- Iteration 1/5 ---
+Wants to enter critical section (setting flag[1] = true)
+[7] Thread 1: >>> ENTERING CRITICAL SECTION <<<
+[6] Thread 0: Wants to enter critical section (setting flag[0] = true)
+[9] Thread 0: Contention detected! Thread 1 also wants in.
+[8] Thread 1: Reading shared_counter = 0
+[10] Thread 1: Writing shared_counter = 1
+[11] Thread 1: <<< LEAVING CRITICAL SECTION >>>
+[12] Thread 1: Passing turn to Thread 0
+[13] Thread 1: [14] Thread 0: >>> ENTERING CRITICAL SECTION <<<
+[15] Thread 0: Reading shared_counter = 1
+Released lock (flag[1] = false)
+[16] Thread 1: Doing non-critical work...
+[17] Thread 1: --- Iteration 2/5 ---
+[18] Thread 1: Wants to enter critical section (setting flag[1] = true)
+[19] Thread 1: Contention detected! Thread 0 also wants in.
+[20] Thread 1: Not my turn (turn=0). Backing off and waiting...
+[21] Thread 0: Writing shared_counter = 2
+[22] Thread 0: <<< LEAVING CRITICAL SECTION >>>
+[23] Thread 0: Passing turn to Thread 1
+[[25] Thread 1: My turn now! Re-raising flag.
+[26] Thread 1: >>> ENTERING CRITICAL SECTION <<<
+[27] Thread 1: Reading shared_counter = 2
+24] Thread 0: Released lock (flag[0] = false)
+[28] Thread 0: Doing non-critical work...
+[29] Thread 0: --- Iteration 2/5 ---
+[30] Thread 0: Wants to enter critical section (setting flag[0] = true)
+[31] Thread 0: Contention detected! Thread 1 also wants in.
+[32] Thread 0: Not my turn (turn=1). Backing off and waiting...
+[33] Thread 1: Writing shared_counter = 3
+[34] Thread 1: <<< LEAVING CRITICAL SECTION >>>
+[35] Thread 1: Passing turn to Thread 0
+[36] Thread 1: Released lock (flag[1] = false)
+[38] Thread 1: Doing non-critical work...
+[37] Thread 0: My turn now! Re-raising flag.
+[39] Thread 0: >>> ENTERING CRITICAL SECTION <<<
+[40] Thread 0: Reading shared_counter = 3
+[41] Thread 1: --- Iteration 3/5 ---
+[42] Thread 1: Wants to enter critical section (setting flag[1] = true)
+[43] Thread 1: Contention detected! Thread 0 also wants in.
+[44] Thread 1: Not my turn (turn=0). Backing off and waiting...
+[45] Thread 0: Writing shared_counter = 4
+[46] Thread 0: <<< LEAVING CRITICAL SECTION >>>
+[47] Thread 0: Passing turn to Thread 1
+[48] Thread 0[: Released lock (flag[0] = false)
+[50] Thread 0: Doing non-critical work...
+49] Thread 1: My turn now! Re-raising flag.
+[51] Thread 1: >>> ENTERING CRITICAL SECTION <<<
+[52] Thread 1: Reading shared_counter = 4
+[53] Thread 0: --- Iteration 3/5 ---
+[54] Thread 0: Wants to enter critical section (setting flag[0] = true)
+[55] Thread 0: Contention detected! Thread 1 also wants in.
+[56] Thread 0: Not my turn (turn=1). Backing off and waiting...
+[57] Thread 1: Writing shared_counter = 5
+[58] Thread 1: <<< LEAVING CRITICAL SECTION >>>
+[59] Thread 1: Passing turn to Thread 0
+[60] Thread 1: Released lock (flag[1] = false)
+[62] Thread 1: Doing non-critical work...
+[61] Thread 0: My turn now! Re-raising flag.
+[63] Thread 0: >>> ENTERING CRITICAL SECTION <<<
+[64] Thread 0: Reading shared_counter = 5
+[65] Thread 1: --- Iteration 4/5 ---
+[66] Thread 1: Wants to enter critical section (setting flag[1] = true)
+[67] Thread 1: Contention detected! Thread 0 also wants in.
+[68] Thread 1: Not my turn (turn=0). Backing off and waiting...
+[69] Thread 0: Writing shared_counter = 6
+[70] Thread 0: <<< LEAVING CRITICAL SECTION >>>
+[71] Thread 0: Passing turn to Thread 1
+[72] Thread 0: [Released lock (flag[0] = false)
+[74] Thread 0: Doing non-critical work...
+73] Thread 1: My turn now! Re-raising flag.
+[75] Thread 1: >>> ENTERING CRITICAL SECTION <<<
+[76] Thread 1: Reading shared_counter = 6
+[77] Thread 0: --- Iteration 4/5 ---
+[78] Thread 0: Wants to enter critical section (setting flag[0] = true)
+[79] Thread 0: Contention detected! Thread 1 also wants in.
+[80] Thread 0: Not my turn (turn=1). Backing off and waiting...
+[81] Thread 1: Writing shared_counter = 7
+[82] Thread 1: <<< LEAVING CRITICAL SECTION >>>
+[83] Thread 1: Passing turn to Thread 0
+[84] Thread 1: [85] Thread 0: My turn now! Re-raising flag.
+[86] Thread 0: >>> ENTERING CRITICAL SECTION <<<
+[87] Thread 0: Reading shared_counter = 7
+Released lock (flag[1] = false)
+[88] Thread 1: Doing non-critical work...
+[89] Thread 1: --- Iteration 5/5 ---
+[90] Thread 1: Wants to enter critical section (setting flag[1] = true)
+[91] Thread 1: Contention detected! Thread 0 also wants in.
+[92] Thread 1: Not my turn (turn=0). Backing off and waiting...
+[93] Thread 0: Writing shared_counter = 8
+[94] Thread 0: <<< LEAVING CRITICAL SECTION >>>
+[95] Thread 0: Passing turn to Thread 1
+[96] Thread 0: Released lock (flag[0] = false)
+[98] Thread 0: Doing non-critical work...
+[97] Thread 1: My turn now! Re-raising flag.
+[99] Thread 1: >>> ENTERING CRITICAL SECTION <<<
+[100] Thread 1: Reading shared_counter = 8
+[101] Thread 0: --- Iteration 5/5 ---
+[102] Thread 0: Wants to enter critical section (setting flag[0] = true)
+[103] Thread 0: Contention detected! Thread 1 also wants in.
+[104] Thread 0: Not my turn (turn=1). Backing off and waiting...
+[105] Thread 1: Writing shared_counter = 9
+[106] Thread 1: <<< LEAVING CRITICAL SECTION >>>
+[107] Thread 1: Passing turn to Thread 0
+[108] Thread 1[109] Thread 0: My turn now! Re-raising flag.
+[110] Thread 0: >>> ENTERING CRITICAL SECTION <<<
+[111] Thread 0: Reading shared_counter = 9
+: Released lock (flag[1] = false)
+[112] Thread 1: Doing non-critical work...
+[113] Thread 1: === FINISHED ===
+[114] Thread 0: Writing shared_counter = 10
+[115] Thread 0: <<< LEAVING CRITICAL SECTION >>>
+[116] Thread 0: Passing turn to Thread 1
+[117] Thread 0: Released lock (flag[0] = false)
+[118] Thread 0: Doing non-critical work...
+[119] Thread 0: === FINISHED ===
+════════════════════════════════════════════════════════════════
+
+╔══════════════════════════════════════════════════════════════╗
+║                        RESULTS                               ║
+╠══════════════════════════════════════════════════════════════╣
+║  Final shared_counter = 10                                   ║
+║  Expected value       = 10                                   ║
+║                                                              ║
+║  ✓ MUTUAL EXCLUSION VERIFIED - No race conditions!          ║
+╚══════════════════════════════════════════════════════════════╝
